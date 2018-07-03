@@ -84,6 +84,11 @@ public class ConvertTemperature extends javax.swing.JFrame {
         });
 
         butCalc.setText("Calc");
+        butCalc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butCalcActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,6 +185,29 @@ public class ConvertTemperature extends javax.swing.JFrame {
         txtTemp.setText("");
         txtResult.setText("");
     }//GEN-LAST:event_butClearActionPerformed
+
+    private void butCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butCalcActionPerformed
+        try {
+            double t = Double.parseDouble(txtTemp.getText());
+            double r;
+            if (!(radCels.isSelected()) && !(radFahr.isSelected())) {
+                txtResult.setText("Select C or F");
+            }
+
+            if (radCels.isSelected()) {
+                r = ((t * 9) / 5) + 32;
+                String result = String.format("%.2f", r);
+                txtResult.setText(result);
+            }
+            if (radFahr.isSelected()) {
+                r = ((t -32) * 5) / 9;
+                String result = String.format("%.2f", r);
+                txtResult.setText(result);
+            }
+        } catch (NumberFormatException e) {
+            txtResult.setText("Must be a number");
+        }
+    }//GEN-LAST:event_butCalcActionPerformed
 
     /**
      * @param args the command line arguments
